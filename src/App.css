@@ -1,0 +1,269 @@
+@media only screen and (min-width: 400px) {
+  .signin {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Poppins;
+  }
+
+  .signin0 {
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .signin1 {
+    width: 50%;
+    height: 97%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signin2 {
+    width: 40%;
+    height: 97%;
+  }
+
+  .signin10 {
+    width: 60%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .signin11 {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .signin111 {
+    width: 75%;
+    font-size: 1.8vw;
+    font-weight: 500;
+    font-family: Poppins;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .signin112 {
+    font-size: 1vw;
+    font-weight: 400;
+    font-family: Poppins;
+  }
+  .signin113 {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1vw;
+    font-weight: 500;
+  }
+
+  .signinput {
+    height: 1.8vw;
+    font-size: 1vw;
+    border: solid rgb(150, 147, 147) 0.1vw;
+  }
+
+  .signin114 {
+    margin-top: 1vw;
+    text-align: right;
+    font-size: 1vw;
+    color: #4141a5;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .signin114:hover {
+    cursor: pointer;
+  }
+  .signin115 {
+    width: 100%;
+    height: 2.8vw;
+    background-color: #4141a5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 0.52vw;
+    font-size: 1.1vw;
+  }
+
+  .signin115:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    background-color: #6d6dc0;
+  }
+
+  .signin12 {
+    font-size: 1vw;
+    height: 2.2vw;
+    display: flex;
+    align-items: center;
+    padding: 0.3vw 0.8vw 0.3vw 0.8vw;
+    border-radius: 1vw;
+  }
+  .signin12:hover {
+    background-color: rgb(186, 186, 189);
+    cursor: pointer;
+  }
+  .signin13 {
+    font-size: 1vw;
+    height: 2.2vw;
+    display: flex;
+    align-items: center;
+    padding: 0.3vw 0.8vw 0.3vw 0.8vw;
+    border-radius: 1vw;
+  }
+  .signin13:hover {
+    background-color: rgb(186, 186, 189);
+    cursor: pointer;
+  }
+
+  .logosignin {
+    margin-right: 1vw;
+  }
+  .signin14 {
+    font-size: 1.1vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .signin2 {
+    display: none;
+  }
+  .signin0 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .signin1 {
+    height: 100%;
+    width: 100%;
+    font-size: 5vw;
+  }
+  .signin10 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #d4d4da;
+  }
+  .signin11 {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .signin111 {
+    width: 100%;
+    font-size: 8vw;
+    font-weight: 500;
+    font-family: Poppins;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signin112 {
+    font-size: 5vw;
+    font-weight: 400;
+    font-family: Poppins;
+    text-align: center;
+  }
+  .signin113 {
+    width: 90%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    font-size: 6vw;
+    font-weight: 500;
+    justify-content: space-evenly;
+  }
+  .signinput {
+    height: 10vw;
+    font-size: 5vw;
+    border: solid rgb(150, 147, 147) 0.1vw;
+  }
+
+  .signin114 {
+    margin-top: 3vw;
+    text-align: right;
+    font-size: 5vw;
+    color: #4141a5;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .signin114:hover {
+    cursor: pointer;
+  }
+  .signin115 {
+    width: 80%;
+    height: 10%;
+    background-color: #4141a5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 5vw;
+    font-size: 6vw;
+  }
+
+  .signin115:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: #6d6dc0;
+  }
+
+  .signin12 {
+    font-size: 5vw;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1vw;
+  }
+  .signin12:hover {
+    cursor: pointer;
+  }
+  .signin13 {
+    font-size: 5vw;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vw;
+  }
+  .signin13:hover {
+    cursor: pointer;
+  }
+
+  .logosignin {
+    margin-right: 3vw;
+  }
+  .signin14 {
+    width: auto;
+    font-size: 5vw;
+  }
+}
