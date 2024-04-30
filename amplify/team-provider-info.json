@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tourista-dev-144700-authRole",
+      "UnauthRoleArn": "arn:aws:iam::637423513949:role/amplify-tourista-dev-144700-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::637423513949:role/amplify-tourista-dev-144700-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-tourista-dev-144700-deployment",
+      "UnauthRoleName": "amplify-tourista-dev-144700-unauthRole",
+      "StackName": "amplify-tourista-dev-144700",
+      "StackId": "arn:aws:cloudformation:eu-north-1:637423513949:stack/amplify-tourista-dev-144700/c98a0bb0-e763-11ee-ac03-0e24c393a4ff",
+      "AmplifyAppId": "do1vh5u0e6p6d"
+    },
+    "categories": {
+      "auth": {
+        "tourista76c8fea9": {}
+      }
+    }
+  }
+}

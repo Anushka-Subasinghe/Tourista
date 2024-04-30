@@ -8,13 +8,36 @@ import review from "./images/Review.png";
 import footer from "./images/Footer.png";
 import aaaa from "./images/CTA.png";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "./actions/authActions";
+import { useState } from "react";
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 
 export function Main() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch();
+
+  const handleAvatarClick = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
+  };
+
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(logout());
+
+    // Reload the page
+    window.location.reload();
+  };
+
   return (
     <div className="main">
       <div className="sections1">
         <div className="secrow1">
-          <img src={logo} />
+          <img src={logo} alt="Logo" />
           <div className="rownm0">
             <div className="rownm">Destinations</div>
             <div className="rownm">Gallery</div>
@@ -22,15 +45,31 @@ export function Main() {
             <div className="rownm">Contact</div>
           </div>
           <div className="rownm1">
-            <Link
-              to="signin"
-              className="rownm"
-              style={{ textDecoration: "none" }}
-            >
-              Login
-            </Link>
-
-            <div className="signup">signup</div>
+            {isAuthenticated ? (
+              <>
+                <div onClick={handleAvatarClick}>
+                  <Avatar src="avatar.jpg" alt="User Avatar" />
+                </div>
+                {isDropdownOpen && (
+                  <div className="dropdown-content-column">
+                    <div>{user.username}</div>
+                    <div>{user.email}</div>
+                    <Button onClick={handleLogout}>Logout</Button>
+                  </div> )}
+              </>
+            ) : (
+              <>
+                {/* Signin and Signup links */}
+                <Link to="signin" className="rownm" style={{ textDecoration: "none" }}>
+                  Login
+                </Link>
+                <div className="signup">
+                  <Link to="signup" className="rownm" style={{ textDecoration: "none" }}>
+                    Sign Up
+                  </Link>
+                </div>
+              </>
+            )}
             <div className="rownm">EN</div>
           </div>
         </div>
@@ -39,10 +78,19 @@ export function Main() {
             JOURNEY TO
             <br /> EXPLORE WORLD
           </div>
-          <div className="rownm3">
-            Travel, enjoy and live a new and full life
+          <div className="rownm3">Travel, enjoy and live a new and full life</div>
+          <div className="rownm4">
+            {/* Conditionally render Link based on authentication state */}
+            {isAuthenticated ? (
+              <Link to="/trip-planning" className="rownm" style={{ textDecoration: "none" }}>
+                Plan Your Trip
+              </Link>
+            ) : (
+              <Link to="/signin" className="rownm" style={{ textDecoration: "none" }}>
+                Plan Your Trip
+              </Link>
+            )}
           </div>
-          <div className="rownm4">Plan Your Trip</div>
         </div>
       </div>
       <div className="sections2">
