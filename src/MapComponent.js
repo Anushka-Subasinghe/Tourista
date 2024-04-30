@@ -1,39 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, Marker, LoadScript, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '800px',
   height: '800px',
 };
 
-const MapComponent = ({ currentPosition }) => {
-  const [topDestinations, setTopDestinations] = useState([]);
+const MapComponent = ({ currentPosition, routeItinerary }) => {
   const [selectedDestination, setSelectedDestination] = useState(null);
+  const [directions, setDirections] = useState(null);
 
   useEffect(() => {
-    if (currentPosition) {
-      const { lat, lng } = currentPosition;
-      const radius = 5000; // Specify radius in meters
-      const apiKey = 'AIzaSyAPyaxZpoWiopqC2SH2xCD2Py2zoSbqSZ8'; // Replace with your actual API key
-      const url = `http://localhost:3000/places?lat=${lat}&lng=${lng}&radius=${radius}&apiKey=${apiKey}`;
+    if (routeItinerary) {
+      const origin = {
+        lat: routeItinerary.waypoints[0].lat,
+        lng: routeItinerary.waypoints[0].lng
+      };
+      const destination = {
+        lat: routeItinerary.waypoints[routeItinerary.waypoints.length - 1].lat,
+        lng: routeItinerary.waypoints[routeItinerary.waypoints.length - 1].lng
+      };
+      const waypoints = routeItinerary.waypoints.slice(1, -1).map(waypoint => ({
+        location: {
+          lat: waypoint.lat,
+          lng: waypoint.lng
+        }
+      }));
 
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route(
+        {
+          origin: origin,
+          destination: destination,
+          waypoints: waypoints,
+          travelMode: 'DRIVING'
+        },
+        (result, status) => {
+          if (status === 'OK') {
+            setDirections(result);
+          } else {
+            console.error('Directions request failed due to ' + status);
           }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.results) {
-            setTopDestinations(data.results);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching top destinations:', error);
-        });
+        }
+      );
     }
-  }, [currentPosition]);
+  }, [routeItinerary]);
 
   return (
     <LoadScript
@@ -53,13 +64,13 @@ const MapComponent = ({ currentPosition }) => {
             }}
           />
 
-          {/* Markers for top destinations */}
-          {topDestinations.map((destination, index) => (
+          {/* Markers for destinations */}
+          {routeItinerary && routeItinerary.waypoints.map((destination, index) => (
             <Marker
               key={index}
               position={{
-                lat: destination.geometry.location.lat,
-                lng: destination.geometry.location.lng
+                lat: destination.lat,
+                lng: destination.lng
               }}
               icon={{
                 url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png', // Red color marker
@@ -73,19 +84,12 @@ const MapComponent = ({ currentPosition }) => {
             />
           ))}
 
-          {/* InfoWindow to display destination's name */}
-          {selectedDestination && (
-            <InfoWindow
-              position={{
-                lat: selectedDestination.geometry.location.lat,
-                lng: selectedDestination.geometry.location.lng
-              }}
-              onCloseClick={() => {
-                setSelectedDestination(null);
-              }}
-            >
-              <div>{selectedDestination.name}</div>
-            </InfoWindow>
+          {/* Display route on the map if directions are available */}
+          {directions && (
+            <DirectionsRenderer
+              options={{ preserveViewport: true }}
+              directions={directions}
+            />
           )}
         </GoogleMap>
       )}
