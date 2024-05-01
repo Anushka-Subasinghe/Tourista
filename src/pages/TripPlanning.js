@@ -3,6 +3,8 @@ import MapComponent from '../MapComponent';
 import { Button, Page, Datepicker } from '@mobiscroll/react';
 import '../mobiscroll.javascript.min.css';
 import * as moment from 'moment';
+import './TripPlanning.css';
+
 
 const TripPlanning = () => {
   const [checkInDate, setCheckInDate] = useState(moment());
@@ -41,14 +43,7 @@ const TripPlanning = () => {
     setCheckOutDate(value.value);
   };
 
-  const calculateDuration = () => {
-    const checkIn = moment(checkInDate);
-    const checkOut = moment(checkOutDate);
-    return checkOut.diff(checkIn, 'days');
-  };
-
   const handlePlanTrip = async () => {
-    const tripDuration = calculateDuration();
     // Pass trip duration and current position to backend to calculate route itinerary
     try {
       const response = await fetch('http://localhost:3000/calculate-route', {
@@ -77,7 +72,7 @@ const TripPlanning = () => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <MapComponent currentPosition={currentPosition} routeItinerary={routeItinerary} />
       </div>
-      <Page>
+      {!routeItinerary &&  (<Page>
         <div className="mbsc-grid mbsc-grid-fixed">
           <div className="mbsc-form-group">
             <div className="mbsc-row mbsc-justify-content-center">
@@ -112,7 +107,25 @@ const TripPlanning = () => {
             </div>
           </div>
         </div>
-      </Page>
+      </Page>)}
+      {routeItinerary && (
+        <div style={{textAlign: "center"}}>
+          <h2 className='route-itinerary-heading'>Route Itinerary</h2>
+          <div className="route-itinerary">
+            <div className="leg-details-container">
+              {routeItinerary.route.legs.map((leg, index) => (
+                <div className="leg-details" key={index}>
+                  <h3>Day {index + 1}</h3>
+                  <p>Distance: {leg.distance.text}</p>
+                  <p>Duration: {leg.duration.text}</p>
+                  <p>Start Address: {leg.start_address}</p>
+                  <p>End Address: {leg.end_address}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
